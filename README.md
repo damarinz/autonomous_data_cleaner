@@ -57,5 +57,6 @@ You can download "CREATE TABLE" schema from SQL Developer.
 Bungo Tamari
 
 the test data from e-stat.go.jp
+このサービスは、政府統計総合窓口(e-Stat)のAPI機能を使用していますが、サービスの内容は国によって保証されたものではありません。
 
 

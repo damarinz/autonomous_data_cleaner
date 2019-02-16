@@ -143,13 +143,13 @@ def main
 
 
   # 弾かれたCSVデータの書き出し
-  CSV.open("#{passed_data_filename}",'w',:force_quotes=>true) do |csv|
+  CSV.open("./out/#{passed_data_filename}",'w',:force_quotes=>true) do |csv|
     passed_row.each do |row|
       csv.add_row(row)
     end
   end
 
-  CSV.open("#{wrong_data_filename}",'w',:force_quotes=>true) do |csv|
+  CSV.open("./out/#{wrong_data_filename}",'w',:force_quotes=>true) do |csv|
     wrong_row.each do |row|
       csv.add_row(row)
     end
@@ -160,8 +160,8 @@ def main
   # Report
   puts "schema file: #{ARGV[0]}"
   puts "Checked file: #{data_filename}"
-  puts "Check passed: #{passed_data_filename}"
-  puts "Check failed: #{wrong_data_filename}"
+  puts "Check passed: ./out/#{passed_data_filename}"
+  puts "Check failed: ./out/#{wrong_data_filename}"
   puts "number of data columns: #{array_columns_location}"
   puts "Processed lines: #{row_count}"
   puts "Number of pass lines: #{passed_row.count}"
