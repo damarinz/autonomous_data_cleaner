@@ -13,7 +13,9 @@ MIT
 # Usage
 
 1. clone from github
-2. install Ruby 2.6.0 or later(might be work 2.1 or later)
+2. install Ruby 2.6.0 or later(might be work with 2.1 or later)
+3. run adw_data_cleaner
+4. found your file in ./out/*
 
 ```bazaar
 % ruby lib/adw_data_cleaner.rb <create_table_sql_file> <csv_data_file>
