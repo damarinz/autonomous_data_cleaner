@@ -117,7 +117,8 @@ def main
     counts     = [*(0..last_count)]
 
     counts.each do |array_position|
-      puts "row: #{row_count} position: #{array_position} datum: #{row[array_position]} datatype: #{array_columns[array_position]}"
+      # debug
+      # puts "row: #{row_count} position: #{array_position} datum: #{row[array_position]} datatype: #{array_columns[array_position]}"
       result = check_schema(row[array_position], array_columns[array_position])
       if result == false
         puts "Wrong data:: line: #{row_count}, column: #{array_position}, type: #{array_columns[array_position]}, datum: #{row[array_position]}"
