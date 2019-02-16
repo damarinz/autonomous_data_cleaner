@@ -1,5 +1,5 @@
-#!/bin/env ruby
-#
+#!/usr/bin/env ruby
+
 
 require 'csv'
 require 'date'
