@@ -13,6 +13,7 @@
            県庁 number(8),
            品目類 varchar2(80),
            年 varchar2(20),
-           月 varchar2(20)
+           月 varchar2(20),
+           入力日 date(10)
            )
         ;

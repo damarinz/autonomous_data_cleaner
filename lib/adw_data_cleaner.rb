@@ -14,26 +14,25 @@ def is_varchar2? (obj)
 end
 
 def is_number? (obj)
-
-    # ... というのが曲者で、数字の小数点に判定されてしまうので複数回出てきたら除外
+    # ... というのが曲者で、数字の小数点に判定されてしまうので複数回出てきたら除外 [^0-9]
     # - 一文字だけも除外
     if obj.nil?
-      #puts "Found nil in number field"
+      puts "Found nil in number field"
       false
-    elsif obj.match(/\A0/)
-      false
-    elsif obj.match(/\.\./)
-      false
-    elsif obj.match(/\-\z/)
-      false
+    elsif Float(obj)
+      true
     elsif Integer(obj)
       true
-    elsif Float(obj)
+    elsif obj.match(/\A0\z/) # 0だけはtrue
       true
     else
       #puts "Found not number in number field"
       false
     end
+    rescue
+      false
+ensure
+  # nothing
 end
 
 def open_schema(file)

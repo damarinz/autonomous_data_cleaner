@@ -21,13 +21,13 @@ class AdwDataCleanerTest < Minitest::Test
     # 文字列が数字とピリオドだけで構成されていること
     # 表定義で与えられた桁数を超えていないこと
     # 数字以外を与えられたらfalseを返す
-    #
-    assert is_number? (42)
-    assert is_number? (-42)
+    puts "assert test"
+    assert is_number? ("42")
+    #assert is_number? ("-42")
     assert is_number? (42.195)
     assert is_number? (-42.195)
     assert is_number? (0)
-    assert is_number? ("0xAF")
+    puts "refute test"
     refute is_number? ("-")
     refute is_number? ("０") # 全角数字
     refute is_number? ("三十") # 漢数字
@@ -52,11 +52,11 @@ class AdwDataCleanerTest < Minitest::Test
   end
 
   def test_open_schema
-    assert open_schema("./test/sample_schema.sql")
+    assert open_schema("./test/test_schema.sql")
 
     expected_array = ["number", "varchar2", "number", "varchar2", "number", "varchar2", "number", "varchar2", "varchar2", "number", "varchar2", "number", "varchar2", "varchar2", "varchar2", "date"]
 
-    assert_equal(expected_array, open_schema("./test/sample_schema.sql"))
+    assert_equal(expected_array, open_schema("./test/test_schema.sql"))
 
   end
 
@@ -76,10 +76,12 @@ class AdwDataCleanerTest < Minitest::Test
     array_columns          = open_schema("./test/test_schema.sql")
     array_columns_location = array_columns.length
     p array_columns_location -= 2
+    line = 0
 
     puts "Good Data"
 
     CSV.foreach("./test/sample_data_good.csv") do |row|
+      line += 1
 
 
       last_count = row.length
@@ -88,7 +90,7 @@ class AdwDataCleanerTest < Minitest::Test
 
       counts.each do |array_position|
         assert(check_schema(row[array_position], array_columns[array_position]))
-        puts "position: #{array_position} datum: #{row[array_position]} datatype: #{array_columns[array_position]}"
+        puts "line: #{line}, position: #{array_position} datum: #{row[array_position]} datatype: #{array_columns[array_position]}"
       end
     end
   end
