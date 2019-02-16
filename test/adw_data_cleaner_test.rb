@@ -14,7 +14,6 @@ class AdwDataCleanerTest < Minitest::Test
     assert is_varchar2? ("实线事证明真理的唯一办法")
 
 
-
   end
 
   def test_is_number
@@ -55,7 +54,7 @@ class AdwDataCleanerTest < Minitest::Test
   def test_open_schema
     assert open_schema("./test/sample_schema.sql")
 
-    expected_array = ["number", "varchar2","number","varchar2", "number", "varchar2", "number", "varchar2", "varchar2", "number", "varchar2", "number", "varchar2", "varchar2", "varchar2","date"]
+    expected_array = ["number", "varchar2", "number", "varchar2", "number", "varchar2", "number", "varchar2", "varchar2", "number", "varchar2", "number", "varchar2", "varchar2", "varchar2", "date"]
 
     assert_equal(expected_array, open_schema("./test/sample_schema.sql"))
 
@@ -63,23 +62,39 @@ class AdwDataCleanerTest < Minitest::Test
 
 
   def test_check_schema
-    # 型の配列オブジェクト schema_listを読む
-    # 長さの配列オブジェクト length_listを読む
-    # 対象オブジェクトを読む
-    # 少し考えよう
-    # check_schema(line) で一行を処理
-    # 対象配列の長さとスキーマ配列の長さを比較
-    # もしもschema_array[0]がvarcharだったら対象array[n]がvarcharか調べる
-    # case
-    #   schema_array[n] == "number"
-    #     is_number?(data_array[n])
-    #   ....
-    # これを効率よく実施するアルゴリズムを考える
-    # meta programmingの方法を活用
-    # if #{data_array}.#{schema_array[count]} でcount番目の要素のチェック
-    # stringクラスにメソッド追加してもいいかもしれない
+    assert(check_schema("12345", "number"))
+    assert(check_schema("abcde", "varchar2"))
+    assert(check_schema("2018-12-31", "date"))
+    refute(check_schema("abcde", "number"))
+    refute(check_schema("---", "number"))
 
 
   end
 
+
+  def test_integration_check_csv
+    array_columns          = open_schema("./test/sample_schema.sql")
+    array_columns_location = array_columns.length
+    p array_columns_location -= 2
+
+    puts "Good Data"
+
+    CSV.foreach("./test/sample_data_good.csv") do |row|
+
+
+      last_count = row.length
+      last_count -= 1
+      counts = [*(0..last_count)]
+
+      counts.each do |array_position|
+        assert(check_schema(row[array_position], array_columns[array_position]))
+        puts "position: #{array_position} datum: #{row[array_position]} datatype: #{array_columns[array_position]}"
+      end
+    end
+
+
+  end
+
+
 end
+

@@ -41,15 +41,23 @@ def open_schema(file)
     # dateの抜き出しは要検討。文字列で/date\(\d+\)/を検出するが自信がないのと、フラット化するためデータは全てvarchar2,numberべき
 
     line.chomp!
-    puts line
-
   end
   schema_file.close
-  puts array_columns
-
   array_columns
 end
 
+def check_schema(actual_datum, expected_type)
+  if expected_type == "varchar2"
+    is_varchar2?(actual_datum)
+  elsif expected_type == "number"
+    is_number?(actual_datum)
+  elsif expected_type == "date"
+    is_date?(actual_datum)
+  else
+    false
+  end
+
+end
 
 
 def end_at_CRLF? (obj)
