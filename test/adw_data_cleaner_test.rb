@@ -51,4 +51,35 @@ class AdwDataCleanerTest < Minitest::Test
     # '2018-01-01'.match?(/\A(\d{4})(\-|\/)(0[1-9]|1[0-2])(\-|\/)(0[1-9]|[12][0-9]|3[01])\z/)
     # '2018-01-01  9:00:00'.match?(/\A(\d{4})(\-|\/)(0[1-9]|1[0-2])(\-|\/)(0[1-9]|[12][0-9]|3[01])\s+\d{1,2}:\d{1,2}:\d{1,2}\z/)
   end
+
+  def test_open_schema
+    assert open_schema("./test/sample_schema.sql")
+
+    expected_array = ["number", "varchar2","number","varchar2", "number", "varchar2", "number", "varchar2", "varchar2", "number", "varchar2", "number", "varchar2", "varchar2", "varchar2","date"]
+
+    assert_equal(expected_array, open_schema("./test/sample_schema.sql"))
+
+  end
+
+
+  def test_check_schema
+    # 型の配列オブジェクト schema_listを読む
+    # 長さの配列オブジェクト length_listを読む
+    # 対象オブジェクトを読む
+    # 少し考えよう
+    # check_schema(line) で一行を処理
+    # 対象配列の長さとスキーマ配列の長さを比較
+    # もしもschema_array[0]がvarcharだったら対象array[n]がvarcharか調べる
+    # case
+    #   schema_array[n] == "number"
+    #     is_number?(data_array[n])
+    #   ....
+    # これを効率よく実施するアルゴリズムを考える
+    # meta programmingの方法を活用
+    # if #{data_array}.#{schema_array[count]} でcount番目の要素のチェック
+    # stringクラスにメソッド追加してもいいかもしれない
+
+
+  end
+
 end

@@ -20,9 +20,35 @@ def is_number? (obj)
 
 rescue ArgumentError
   false
-
 end
 
+def open_schema(file)
+
+  # 正規表現でvarchar2, number, date配列を返す
+  array_columns = []
+  schema_file = File.open(file, "rt")
+  schema_file.class # => File
+  lines = schema_file.read().split("\n")
+  lines.each do | line |
+    if datatype = line.match(/varchar2/)
+      array_columns.push(datatype[0])
+    elsif datatype = line.match(/number/)
+      array_columns.push(datatype[0])
+    elsif datatype = line.match(/date\(\d+\)/)
+      datatype_date = datatype[0].split("\(")
+      array_columns.push(datatype_date[0])
+    end
+    # dateの抜き出しは要検討。文字列で/date\(\d+\)/を検出するが自信がないのと、フラット化するためデータは全てvarchar2,numberべき
+
+    line.chomp!
+    puts line
+
+  end
+  schema_file.close
+  puts array_columns
+
+  array_columns
+end
 
 
 
