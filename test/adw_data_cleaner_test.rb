@@ -73,7 +73,7 @@ class AdwDataCleanerTest < Minitest::Test
 
 
   def test_integration_check_csv
-    array_columns          = open_schema("./test/sample_schema.sql")
+    array_columns          = open_schema("./test/test_schema.sql")
     array_columns_location = array_columns.length
     p array_columns_location -= 2
 
@@ -91,8 +91,6 @@ class AdwDataCleanerTest < Minitest::Test
         puts "position: #{array_position} datum: #{row[array_position]} datatype: #{array_columns[array_position]}"
       end
     end
-
-
   end
 
 

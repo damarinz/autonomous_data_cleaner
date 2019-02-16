@@ -1,7 +1,7 @@
         CREATE TABLE KOURIKAKAKU
            (tab_code number(2),
            表章項目 varchar2(10),
-           cat01_code varchar2(6),
+           cat01_code number(6),
            銘柄 varchar2(80),
            area_code number(5),
            地域 varchar2(30),
