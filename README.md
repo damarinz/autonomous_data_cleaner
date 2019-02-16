@@ -2,7 +2,7 @@
 
 Data cleansing tool for Oracle Autonomous Data Warehouse CSV file.
 
-This tool can remove contaminated data in csv.
+This tool can remove contaminated data in your csv.
 
 example:  "aabbccdd","None","---","..." in Number column.
 
@@ -55,5 +55,7 @@ You can download "CREATE TABLE" schema from SQL Developer.
 ## Copyright / Author
 
 Bungo Tamari
+
+the test data from e-stat.go.jp
 
 

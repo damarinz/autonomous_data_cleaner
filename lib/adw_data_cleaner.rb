@@ -14,11 +14,12 @@ def is_varchar2? (obj)
 end
 
 def is_number? (obj)
+    # １カラムだけデータなしを弾いてしまうのも厳しすぎるので、nilは許容
     # ... というのが曲者で、数字の小数点に判定されてしまうので複数回出てきたら除外 [^0-9]
     # - 一文字だけも除外
     if obj.nil?
       puts "Found nil in number field"
-      false
+      true
     elsif Float(obj)
       true
     elsif Integer(obj)

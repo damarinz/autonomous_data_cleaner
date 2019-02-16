@@ -22,8 +22,8 @@ class AdwDataCleanerTest < Minitest::Test
     # 表定義で与えられた桁数を超えていないこと
     # 数字以外を与えられたらfalseを返す
     puts "assert test"
-    assert is_number? ("42")
-    #assert is_number? ("-42")
+    assert is_number? (42)
+    assert is_number? (-42)
     assert is_number? (42.195)
     assert is_number? (-42.195)
     assert is_number? (0)
